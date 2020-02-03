@@ -40,9 +40,10 @@ gif of Storio app should be here
     npm install
     ```
 
-1. Import the example database to MongoDB.
+1. Start PostgreSQL and Import the example database to PostgreSQL.
 
     ```shell
+    sudo service postgresql start
     npm run db:import
     ```
 
