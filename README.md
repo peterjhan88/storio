@@ -15,7 +15,7 @@ Try the application online! [storio in live](https://storio-dev.peterjhan.com/)
 ## Features
 - User can view available storages at desired location both in a list on Google Map
 - User can host a new storage at desired location
-- User can message the owner of available starge
+- User can message the owner of available storge
 ## Preview
 gif of Storio app should be here
 ## Development
