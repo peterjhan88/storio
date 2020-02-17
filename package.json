@@ -118,12 +118,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebtedesco/storio.git"
+    "url": "git+https://github.com/peterjhan88/storio.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/sebtedesco/storio/issues"
+    "url": "https://github.com/peterjhan88/storio/issues"
   },
-  "homepage": "https://github.com/sebtedesco/storio#readme"
+  "homepage": "https://github.com/peterjhan88/storio#readme"
 }
