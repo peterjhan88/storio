@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function HostListItem(props) {
+const HostListItem = props => {
   return (
     <div className="card host-list-item">
       <Link to={`/listing-detail/${props.storageId}`}>
@@ -18,6 +18,6 @@ function HostListItem(props) {
       </Link>
     </div>
   );
-}
+};
 
 export default HostListItem;

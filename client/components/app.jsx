@@ -10,6 +10,8 @@ import Message from './Message';
 import HostNewListing from './HostNewListing';
 import NavigationBar from './NavigationBar';
 
+import { UserProvider } from './UserContext';
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -52,40 +54,41 @@ export default class App extends React.Component {
   render() {
     const currentUser = this.state.currentUser;
     return (
-      <Router>
-        <Route exact={true} path='/'>
-          <LandingPage tryLogIn={this.tryLogIn} user={currentUser} signOut={this.signOut} />
-        </Route>
-        <Route exact={true} path='/conversations/:loggedInUserId'>
-          <Conversations />
-          <NavigationBar user={currentUser}/>
-        </Route>
-        <Route exact={true} path='/explore-list/:city/:state'>
-          <ExploreList user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/explore-map/:city/:state'>
-          <ExploreMap user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/host-listings'>
-          <HostListings user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/listing-detail/:storageId'>
-          <ListingDetail user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/message/:loggedInUserId/:hostId' >
-          <Message user={currentUser}/>
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/host-new-listing'>
-          <HostNewListing user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-      </Router>
-
+      <UserProvider>
+        <Router>
+          <Route exact={true} path='/'>
+            <LandingPage tryLogIn={this.tryLogIn} user={currentUser} signOut={this.signOut} />
+          </Route>
+          <Route exact={true} path='/conversations/:loggedInUserId'>
+            <Conversations />
+            <NavigationBar user={currentUser}/>
+          </Route>
+          <Route exact={true} path='/explore-list/:city/:state'>
+            <ExploreList user={currentUser} />
+            <NavigationBar user={currentUser} />
+          </Route>
+          <Route exact={true} path='/explore-map/:city/:state'>
+            <ExploreMap user={currentUser} />
+            <NavigationBar user={currentUser} />
+          </Route>
+          <Route exact={true} path='/host-listings'>
+            <HostListings user={currentUser} />
+            <NavigationBar user={currentUser} />
+          </Route>
+          <Route exact={true} path='/listing-detail/:storageId'>
+            <ListingDetail user={currentUser} />
+            <NavigationBar user={currentUser} />
+          </Route>
+          <Route exact={true} path='/message/:loggedInUserId/:hostId' >
+            <Message user={currentUser}/>
+            <NavigationBar user={currentUser} />
+          </Route>
+          <Route exact={true} path='/host-new-listing'>
+            <HostNewListing user={currentUser} />
+            <NavigationBar user={currentUser} />
+          </Route>
+        </Router>
+      </UserProvider>
     );
   }
 }
