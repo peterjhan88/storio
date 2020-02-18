@@ -18,7 +18,7 @@ const App = props => {
 
   useEffect(() => {
     // eslint-disable-next-line no-console
-    console.log('something chnaged in the components');
+    console.log('something changed in the components');
   });
 
   const tryLogIn = email => {
