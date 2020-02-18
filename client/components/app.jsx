@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Conversations from './Conversations';
 import ExploreList from './ExploreList';
 import ExploreMap from './ExploreMap';
@@ -19,7 +20,7 @@ const App = props => {
   useEffect(() => {
     // eslint-disable-next-line no-console
     console.log('something changed in the components');
-  });
+  }, []);
 
   const tryLogIn = email => {
     if (email === '') {
