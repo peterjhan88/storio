@@ -267,6 +267,10 @@ COPY public.addresses ("addressId", street1, street2, city, state, zip, longitud
 18	9205 Irvine Center Drive	\N	Irvine	CA	92618	-117.735023699999999	33.6349955000000023
 9	apples and oranges and avocados ave	\N	Irvine	CA	98763	-117.792620999999997	33.6824590000000015
 12	2555 Main Street	\N	Irvine	CA	92614	-117.802610999999999	33.6764110000000016
+19	9200 Irvine Center Drive	\N	Irvine	CA	92618	-117.740498500000001	33.6348674999999986
+20	9000 irvine Center drive	\N	Irvine	CA	12345	-117.740589	33.6368865999999969
+21	9200 Irvine Center Drive	\N	Irvine	CA	92618	-117.740498500000001	33.6348674999999986
+22	9200 Irvine Center Drive	\N	Irvine	CA	92618	-117.740498500000001	33.6348674999999986
 \.
 
 
@@ -298,6 +302,12 @@ COPY public.messages ("messageId", "fromId", "toId", message, "messagedAt") FROM
 26	1	2	decadcaece	2020-01-30 15:16:29.575521
 27	6	5	hey.... that's my place	2020-01-30 15:25:29.455101
 28	6	1	shut up and take my money!	2020-01-30 16:22:43.968074
+29	5	6	not any more~	2020-01-31 10:55:16.041667
+30	1	6	Hi why so rude?	2020-01-31 11:12:34.429398
+31	6	1	sorry	2020-01-31 11:19:12.299663
+32	1	6	you better be!	2020-01-31 11:19:37.133146
+33	1	6	so anyway, still interested?	2020-01-31 16:36:51.697708
+34	6	1	sure	2020-01-31 16:38:17.274258
 \.
 
 
@@ -321,6 +331,10 @@ COPY public.storages ("storageId", width, depth, height, "storagePicturePath", "
 21	5	1	3	/images/storages/map-icon-1580436024926.png	11	12	WOOOOOOW	hi~\nthis is the place	16	4	t
 22	2	1	3	/images/storages/user-icon-1580438438964.png	1	1	Dog house!	test	17	4	t
 23	2	1	3	/images/storages/test-niche-1580439140432.jpg	1	100	Dog house!	Oink! Oink!	18	4	t
+24	2	2	2	/images/storages/my storage-1580498431618.jpg	100	1200	testaliejdlicfnasdinflihsaj	my place	19	6	t
+25	2	2	2	/images/storages/the avatar-1580515601847.jpg	200	4400	asdf	erewadsfaewv	20	5	t
+26	1	1	1	/images/storages/my storage-1580517593794.jpg	1	1200	I would like to get some money!	This is my storage	21	6	t
+27	3	7	3	/images/storages/Image from iOS-1582067467285.jpg	1200	100000	Test title	Cool place!	22	4	t
 \.
 
 
@@ -342,21 +356,21 @@ COPY public.users ("userId", "userName", password, "firstName", "lastName", emai
 -- Name: addresses_addressId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."addresses_addressId_seq"', 18, true);
+SELECT pg_catalog.setval('public."addresses_addressId_seq"', 22, true);
 
 
 --
 -- Name: messages_messageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."messages_messageId_seq"', 28, true);
+SELECT pg_catalog.setval('public."messages_messageId_seq"', 34, true);
 
 
 --
 -- Name: storages_storageId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."storages_storageId_seq"', 23, true);
+SELECT pg_catalog.setval('public."storages_storageId_seq"', 27, true);
 
 
 --

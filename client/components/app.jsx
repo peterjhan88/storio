@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+
 import Conversations from './Conversations';
 import ExploreList from './ExploreList';
 import ExploreMap from './ExploreMap';
@@ -10,27 +11,18 @@ import Message from './Message';
 import HostNewListing from './HostNewListing';
 import NavigationBar from './NavigationBar';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: null,
-      isLoading: true,
-      currentUser: 'guest'
-    };
-    this.tryLogIn = this.tryLogIn.bind(this);
-    this.signOut = this.signOut.bind(this);
-  }
+import { UserContext } from './UserContext';
 
-  componentDidMount() {
-    fetch('/api/health-check')
-      .then(res => res.json())
-      .then(data => this.setState({ message: data.message || data.error }))
-      .catch(err => this.setState({ message: err.message }))
-      .finally(() => this.setState({ isLoading: false }));
-  }
+const App = props => {
 
-  tryLogIn(email) {
+  const [currentUser, setCurrentUser] = useContext(UserContext);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log('something changed in the components');
+  }, []);
+
+  const tryLogIn = email => {
     if (email === '') {
       return;
     }
@@ -40,52 +32,52 @@ export default class App extends React.Component {
         if (jsonData === 'DNE') {
           return;
         }
-        this.setState({ currentUser: jsonData });
+        setCurrentUser(prevUser => {
+          return jsonData;
+        });
       })
       .catch(err => console.error(err));
-  }
+  };
 
-  signOut() {
-    this.setState({ currentUser: 'guest' });
-  }
+  const signOut = () => {
+    setCurrentUser('guest');
+  };
 
-  render() {
-    const currentUser = this.state.currentUser;
-    return (
-      <Router>
-        <Route exact={true} path='/'>
-          <LandingPage tryLogIn={this.tryLogIn} user={currentUser} signOut={this.signOut} />
-        </Route>
-        <Route exact={true} path='/conversations/:loggedInUserId'>
-          <Conversations />
-          <NavigationBar user={currentUser}/>
-        </Route>
-        <Route exact={true} path='/explore-list/:city/:state'>
-          <ExploreList user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/explore-map/:city/:state'>
-          <ExploreMap user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/host-listings'>
-          <HostListings user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/listing-detail/:storageId'>
-          <ListingDetail user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/message/:loggedInUserId/:hostId' >
-          <Message user={currentUser}/>
-          <NavigationBar user={currentUser} />
-        </Route>
-        <Route exact={true} path='/host-new-listing'>
-          <HostNewListing user={currentUser} />
-          <NavigationBar user={currentUser} />
-        </Route>
-      </Router>
+  return (
+    <Router>
+      <Route exact={true} path='/'>
+        <LandingPage tryLogIn={tryLogIn} user={currentUser} signOut={signOut} />
+      </Route>
+      <Route exact={true} path='/conversations/:loggedInUserId'>
+        <Conversations />
+        <NavigationBar user={currentUser}/>
+      </Route>
+      <Route exact={true} path='/explore-list/:city/:state'>
+        <ExploreList user={currentUser} />
+        <NavigationBar user={currentUser} />
+      </Route>
+      <Route exact={true} path='/explore-map/:city/:state'>
+        <ExploreMap user={currentUser} />
+        <NavigationBar user={currentUser} />
+      </Route>
+      <Route exact={true} path='/host-listings'>
+        <HostListings user={currentUser} />
+        <NavigationBar user={currentUser} />
+      </Route>
+      <Route exact={true} path='/listing-detail/:storageId'>
+        <ListingDetail user={currentUser} />
+        <NavigationBar user={currentUser} />
+      </Route>
+      <Route exact={true} path='/message/:loggedInUserId/:hostId' >
+        <Message user={currentUser}/>
+        <NavigationBar user={currentUser} />
+      </Route>
+      <Route exact={true} path='/host-new-listing'>
+        <HostNewListing user={currentUser} />
+        <NavigationBar user={currentUser} />
+      </Route>
+    </Router>
+  );
+};
 
-    );
-  }
-}
+export default App;

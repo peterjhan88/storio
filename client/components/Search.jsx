@@ -1,29 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
-class Search extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      city: '',
-      state: '',
-      cityError: '',
-      stateError: ''
-    };
-    this.handleCityChange = this.handleCityChange.bind(this);
-    this.handleStateChange = this.handleStateChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+const Search = props => {
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [cityError, setCityError] = useState('');
+  const [stateError, setStateError] = useState('');
 
-  handleCityChange(e) {
-    this.setState({ city: e.target.value });
-  }
+  const handleCityChange = e => {
+    setCity(e.target.value);
+  };
 
-  handleStateChange(e) {
-    this.setState({ state: e.target.value });
-  }
+  const handleStateChange = e => {
+    setState(e.target.value);
+  };
 
-  formatCity(cityName) {
+  const formatCity = cityName => {
     cityName = cityName.toLowerCase();
     const cityNameArr = cityName.split('');
     for (let i = 0; i < cityNameArr.length; i++) {
@@ -33,50 +25,47 @@ class Search extends React.Component {
     }
     const result = cityNameArr.join('');
     return result;
-  }
+  };
 
-  handleSubmit(e) {
+  const handleSubmit = e => {
     e.preventDefault();
-    let state = this.state.state;
-    let city = this.state.city;
     if (!city && !state) {
-      this.setState({ cityError: 'City required', stateError: 'State required' });
+      setCityError('City required');
+      setStateError('State required');
     } else if (!city) {
-      this.setState({ cityError: 'City required', stateError: '' });
+      setCityError('City required');
+      setStateError('');
     } else if (!state) {
-      this.setState({ cityError: '', stateError: 'State required' });
+      setCityError('');
+      setStateError('State required');
     } else {
-      city = this.formatCity(city);
-      state = state.toUpperCase();
-      this.setState({ cityError: '', stateError: '', city: '', state: '' });
-      this.props.history.push(`/explore-list/${city}/${state}`);
-
+      props.history.push(`/explore-list/${formatCity(city)}/${state.toUpperCase()}`);
+      setCity('');
+      setState('');
+      setCityError('');
+      setStateError('');
     }
-  }
+  };
 
-  render() {
-    return (
-      <React.Fragment>
-        <div className={`container ${this.props.extraClass ? this.props.extraClass : ''}`}>
-          <form className="row m-2 d-flex align-items-center" onSubmit={this.handleSubmit}>
-            <div className="col-6 form-group pl-1 m-0">
-              <label className="sr-only">City</label>
-              <input className="form-control" onChange={this.handleCityChange} type="text" value={this.state.city} placeholder="City Name" />
-              <small className="validation-error-message">{this.state.cityError}</small>
-            </div>
-            <div className="col-4 form-group p-0 m-0">
-              <label className="sr-only">State</label>
-              <input className="form-control" onChange={this.handleStateChange} type="text" placeholder="State" maxLength="2" value={this.state.state} />
-              <small className="validation-error-message">{this.state.stateError}</small>
-            </div>
-            <div className="col-2 form-group m-0">
-              <button className="btn btn-outline-light"><i className="fas fa-search" /></button>
-            </div>
-          </form>
+  return (
+    <div className={`container ${props.extraClass ? props.extraClass : ''}`}>
+      <form className="row m-2 d-flex align-items-center" onSubmit={handleSubmit}>
+        <div className="col-6 form-group pl-1 m-0">
+          <label className="sr-only">City</label>
+          <input className="form-control" onChange={handleCityChange} type="text" value={city} placeholder="City Name" />
+          <small className="validation-error-message">{cityError}</small>
         </div>
-      </React.Fragment>
-    );
-  }
-}
+        <div className="col-4 form-group p-0 m-0">
+          <label className="sr-only">State</label>
+          <input className="form-control" onChange={handleStateChange} type="text" placeholder="State" maxLength="2" value={state} />
+          <small className="validation-error-message">{stateError}</small>
+        </div>
+        <div className="col-2 form-group m-0">
+          <button className="btn btn-outline-light"><i className="fas fa-search" /></button>
+        </div>
+      </form>
+    </div>
+  );
+};
 
 export default withRouter(Search);
