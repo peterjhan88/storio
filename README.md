@@ -1,4 +1,4 @@
-# storio
+# Storio
 A full stack JavaScript application for people who want to utilize some extra place they have.
 ## Technologies Used
 - React.js
@@ -17,7 +17,8 @@ Try the application online! [storio in live](https://storio-dev.peterjhan.com/)
 - User can host a new storage at desired location
 - User can message the owner of available storge
 ## Preview
-gif of Storio app should be here
+![Storio Dem](demo.gif)
+
 ## Development
 #### System Requirement
 
