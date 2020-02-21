@@ -1,6 +1,4 @@
 # Storio
-Final Project
-# storio
 A full stack JavaScript application for people who want to utilize some extra place they have.
 ## Technologies Used
 - React.js
